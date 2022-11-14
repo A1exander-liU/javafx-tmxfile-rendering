@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="12">
+ <tileset firstgid="1" source="groundSet1.tsx"/>
+ <tileset firstgid="257" source="obstacleSet1.tsx"/>
+ <layer id="1" name="Ground Layer" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzFlcsNgCAMQPHCAGq8q3EAP3Eh3cBJvDivmEjSEAotHz28iAntoxXkFEIMgMt417SKTbEremQOh/N9Ss+8XF4fmNe33lzeVPVi6/+6z/InL6dezreO8RYAbr0lkRV4F0YcxpaBzhjbwGKPCDAXpAHjWjFFQs2n98tDivPRAq8rn8sb8g+0eW15Yus1c4bU6zsfVYY+U/YgpR8cL8Vp5nHdHy6vjhsF/YzMCetNDdV7A/BdaRA=
+  </data>
+ </layer>
+ <layer id="3" name="Obstacle Layer" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAMzBiJE6M2GK724jKLWHtJ0U+ue4ZDOI/aOwpGAX3BUErPA+VWats7lMJ8pAEA6+EE8g==
+  </data>
+ </layer>
+ <objectgroup id="2" name="Collision Layer">
+  <object id="3" x="48" y="48" width="16" height="16"/>
+  <object id="4" x="144" y="0" width="16" height="128"/>
+  <object id="5" x="224" y="0" width="16" height="128"/>
+  <object id="6" x="304" y="48" width="16" height="16"/>
+  <object id="8" x="400" y="48" width="16" height="16"/>
+  <object id="9" x="432" y="224" width="16" height="32"/>
+  <object id="10" x="224" y="208" width="16" height="16"/>
+  <object id="11" x="272" y="256" width="16" height="16"/>
+ </objectgroup>
+</map>

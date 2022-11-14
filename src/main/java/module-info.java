@@ -1,0 +1,11 @@
+module com.example.tiledmaptest {
+    requires javafx.controls;
+    requires javafx.fxml;
+    requires TiledReader;
+    requires java.desktop;
+
+    opens com.example.tiledmaptest to javafx.fxml;
+    exports com.example.tiledmaptest;
+    exports com.example.tiledmaptest.starter;
+    opens com.example.tiledmaptest.starter to javafx.fxml;
+}

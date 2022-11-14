@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="1">
+ <tileset firstgid="1" source="groundSet1.tsx"/>
+ <layer id="1" name="Ground Layer" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzdlbsOwjAMRSOGdKYFdh5l5/n/n4aREsmyHOcatwvDWRo3145fc0pp7nAlToULYHMG7qxsArpb4s1snsRUzgaHD9K2p3tk51bM2eFDSzc7dK23jOT3RhyYzY54BHI7gLqRuvLGW33NHV00p9/aHAuToRuNdxTIftC+vRQQG46sw3/nDiB7BLHZd0D6ms8FWTP13zX6SNOV/RHtI22WWPGuNTfkrtHutPbREm/c0kX30VK62amr5bpV03LXaPdZ+8iz93+pGWSGcz7ARVKc
+  </data>
+ </layer>
+ <layer id="2" name="Obstacle Layer" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20JT6AAAHgaCWAAAQ==
+  </data>
+ </layer>
+ <objectgroup id="3" name="Collision Layer"/>
+</map>
