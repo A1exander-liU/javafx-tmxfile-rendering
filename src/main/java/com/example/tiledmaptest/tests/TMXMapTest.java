@@ -3,8 +3,14 @@ package com.example.tiledmaptest.tests;
 import com.example.tiledmaptest.MapRenderer;
 import com.example.tiledmaptest.ResourcePathMapper;
 import javafx.application.Application;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import org.tiledreader.TiledMap;
 import org.tiledreader.TiledReader;
@@ -31,9 +37,26 @@ public class TMXMapTest extends Application {
         tiledMap = tiledReader.getMap(path);
         Group root = new Group();
         root.getChildren().add(MapRenderer.getInstance().render(tiledMap));
+        Rectangle player = new Rectangle(16, 16);
+        root.getChildren().add(player);
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
+        scene.setOnKeyPressed(event -> {
+            // javafx coordinate system is top down
+            if (event.getCode() == KeyCode.W) {
+                player.setY(player.getY() - 5);
+            }
+            if (event.getCode() == KeyCode.A) {
+                player.setX(player.getX() - 5);
+            }
+            if (event.getCode() == KeyCode.S) {
+                player.setY(player.getY() + 5);
+            }
+            if (event.getCode() == KeyCode.D) {
+                player.setX(player.getX() + 5);
+            }
+        });
     }
 
     /**
