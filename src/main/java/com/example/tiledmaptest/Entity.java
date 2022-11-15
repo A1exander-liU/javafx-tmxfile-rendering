@@ -2,11 +2,13 @@ package com.example.tiledmaptest;
 
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Rectangle;
+import org.dyn4j.dynamics.Body;
 
 /**
  * A game entity that has a position and a size.
  */
 public class Entity {
+    private Body body;
     private float x;
     private float y;
     private float width;
@@ -32,6 +34,14 @@ public class Entity {
         this.y = y;
         this.width = width;
         this.height = height;
+    }
+
+    public Body getBody() {
+        return body;
+    }
+
+    public void setBody(final Body body) {
+        this.body = body;
     }
 
     public float getX() {
