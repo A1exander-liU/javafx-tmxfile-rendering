@@ -1,6 +1,7 @@
 package com.example.tiledmaptest;
 
 import javafx.geometry.Point2D;
+import javafx.scene.shape.Rectangle;
 
 /**
  * A game entity that has a position and a size.
@@ -63,5 +64,8 @@ public class Entity {
 
     public void setHeight(final float height) {
         this.height = height;
+    }
+    public Rectangle getEntityRectangle() {
+        return new Rectangle(x, y, width, height);
     }
 }
