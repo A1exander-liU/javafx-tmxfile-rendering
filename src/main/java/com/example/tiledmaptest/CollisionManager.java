@@ -10,6 +10,7 @@ import org.dyn4j.world.World;
  * Manages a world instance where collisions will be simulated.
  */
 public final class CollisionManager {
+    private static CollisionManager collisionManager;
     private static World<Body> world;
     private CollisionManager() { }
 
@@ -17,13 +18,14 @@ public final class CollisionManager {
      * Returns the instance of the world. The same world is returned every time.
      * @return the world
      */
-    public static World<Body> getWorld() {
-        if (world == null) {
+    public static CollisionManager getInstance() {
+        if (collisionManager == null) {
+            collisionManager = new CollisionManager();
             world = new World<>();
             // since the game is top-down, there is no gravity
             world.setGravity(0, 0);
         }
-        return world;
+        return collisionManager;
     }
 
     /**
