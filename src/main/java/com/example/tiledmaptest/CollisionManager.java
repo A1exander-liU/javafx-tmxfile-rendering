@@ -37,6 +37,7 @@ public final class CollisionManager {
         Body body = new Body();
         body.addFixture(Geometry.createRectangle(entity.getWidth(), entity.getHeight()));
         body.setMass(MassType.NORMAL);
+        body.setUserData(entity);
         world.addBody(body);
     }
 
@@ -49,6 +50,7 @@ public final class CollisionManager {
         Body body = new Body();
         body.addFixture(Geometry.createRectangle(entity.getWidth(), entity.getHeight()));
         body.setMass(MassType.INFINITE);
+        body.setUserData(entity);
         world.addBody(body);
     }
 }
