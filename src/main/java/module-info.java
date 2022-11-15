@@ -3,6 +3,7 @@ module com.example.tiledmaptest {
     requires javafx.fxml;
     requires TiledReader;
     requires java.desktop;
+    requires org.dyn4j;
 
     opens com.example.tiledmaptest to javafx.fxml;
     exports com.example.tiledmaptest;
