@@ -29,6 +29,14 @@ public final class CollisionManager {
     }
 
     /**
+     * Advances the world simulation by a single time step.
+     * @param secondsSinceLastFrame the seconds elapsed since the last frame
+     */
+    public void updateWorld(final float secondsSinceLastFrame) {
+        world.update(secondsSinceLastFrame);
+    }
+
+    /**
      * Adds a movable rectangle to the world. Any rectangle that should be moved
      * in the application should use this method.
      * @param entity the rectangle to add to the world
