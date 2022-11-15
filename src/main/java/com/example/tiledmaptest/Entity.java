@@ -53,7 +53,7 @@ public class Entity {
         return width;
     }
 
-    public void setWidth(final int width) {
+    public void setWidth(final float width) {
         this.width = width;
     }
 
@@ -61,7 +61,7 @@ public class Entity {
         return height;
     }
 
-    public void setHeight(final int height) {
+    public void setHeight(final float height) {
         this.height = height;
     }
 }
