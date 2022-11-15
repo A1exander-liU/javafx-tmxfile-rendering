@@ -10,6 +10,7 @@ import org.dyn4j.world.World;
  * Manages a world instance where collisions will be simulated.
  */
 public final class CollisionManager {
+    public static final float PIXELS_TO_METERS = 16;
     private static CollisionManager collisionManager;
     private static World<Body> world;
     private CollisionManager() { }
@@ -43,7 +44,9 @@ public final class CollisionManager {
      */
     public void addDynamicRectangle(final Entity entity) {
         Body body = new Body();
-        body.addFixture(Geometry.createRectangle(entity.getWidth(), entity.getHeight()));
+        final float width = entity.getWidth() / PIXELS_TO_METERS;
+        final float height = entity.getHeight() / PIXELS_TO_METERS;
+        body.addFixture(Geometry.createRectangle(width, height));
         body.setMass(MassType.NORMAL);
         body.setUserData(entity);
         world.addBody(body);
@@ -56,7 +59,9 @@ public final class CollisionManager {
      */
     public void addStaticRectangle(final Entity entity) {
         Body body = new Body();
-        body.addFixture(Geometry.createRectangle(entity.getWidth(), entity.getHeight()));
+        final float width = entity.getWidth() / PIXELS_TO_METERS;
+        final float height = entity.getHeight() / PIXELS_TO_METERS;
+        body.addFixture(Geometry.createRectangle(width, height));
         body.setMass(MassType.INFINITE);
         body.setUserData(entity);
         world.addBody(body);
