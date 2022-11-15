@@ -6,9 +6,10 @@ import javafx.geometry.Point2D;
  * A game entity that has a position and a size.
  */
 public class Entity {
-    private Point2D position;
-    private int width;
-    private int height;
+    private float x;
+    private float y;
+    private float width;
+    private float height;
 
     /**
      * Constructs a new game entity with the specified size. Position will be set at origin,
@@ -26,20 +27,29 @@ public class Entity {
      * @param height the desired height
      */
     public Entity(final int x, final int y, final int width, final int height) {
-        position = new Point2D(x, y);
+        this.x = x;
+        this.y = y;
         this.width = width;
         this.height = height;
     }
 
-    public Point2D getPosition() {
-        return position;
+    public float getX() {
+        return x;
     }
 
-    public void setPosition(final Point2D position) {
-        this.position = position;
+    public void setX(final float x) {
+        this.x = x;
     }
 
-    public int getWidth() {
+    public float getY() {
+        return y;
+    }
+
+    public void setY(final float y) {
+        this.y = y;
+    }
+
+    public float getWidth() {
         return width;
     }
 
@@ -47,7 +57,7 @@ public class Entity {
         this.width = width;
     }
 
-    public int getHeight() {
+    public float getHeight() {
         return height;
     }
 
