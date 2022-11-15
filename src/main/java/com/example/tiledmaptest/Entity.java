@@ -30,4 +30,28 @@ public class Entity {
         this.width = width;
         this.height = height;
     }
+
+    public Point2D getPosition() {
+        return position;
+    }
+
+    public void setPosition(final Point2D position) {
+        this.position = position;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(final int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(final int height) {
+        this.height = height;
+    }
 }
