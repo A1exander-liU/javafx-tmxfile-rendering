@@ -1,16 +1,11 @@
 package com.example.tiledmaptest.tests;
 
-import com.example.tiledmaptest.GameLoop;
-import com.example.tiledmaptest.MapRenderer;
-import com.example.tiledmaptest.RectangleObject;
-import com.example.tiledmaptest.ResourcePathMapper;
+import com.example.tiledmaptest.*;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.tiledreader.FileSystemTiledReader;
-import org.tiledreader.TiledMap;
-import org.tiledreader.TiledReader;
+import org.tiledreader.*;
 
 /**
  * To test collision detection with tiled map object layers.
@@ -48,5 +43,19 @@ public class CollisionTest extends Application {
      */
     public static void main(final String[] args) {
         launch();
+    }
+    /*
+    Adds objects from tiled map object layer to the world for collision detection
+    and resolution.
+     */
+    private void addCollidableObjects(final TiledMap map) {
+        // makes the assumption there is only a single layer where collision objects are defined
+        TiledObjectLayer objectLayer = (TiledObjectLayer) map.getTopLevelLayers().get(2);
+        // reusable entity
+        Entity entity;
+        for (TiledObject object: objectLayer.getObjects()) {
+            entity = new Entity(object.getX(), object.getY(), object.getWidth(), object.getHeight());
+            CollisionManager.getInstance().addStaticRectangle(entity);
+        }
     }
 }
