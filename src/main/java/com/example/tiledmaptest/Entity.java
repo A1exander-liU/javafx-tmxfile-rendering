@@ -16,7 +16,7 @@ public class Entity {
      * @param width the desired width
      * @param height the desired height
      */
-    public Entity(final int width, final int height) {
+    public Entity(final float width, final float height) {
         this(0, 0, width, height);
     }
     /**
@@ -26,7 +26,7 @@ public class Entity {
      * @param width the desired width
      * @param height the desired height
      */
-    public Entity(final int x, final int y, final int width, final int height) {
+    public Entity(final float x, final float y, final float width, final float height) {
         this.x = x;
         this.y = y;
         this.width = width;
