@@ -23,6 +23,7 @@ public class CollisionTest extends Application {
     public void start(final Stage primaryStage) throws Exception {
         TiledReader tiledReader = new FileSystemTiledReader();
         TiledMap map = tiledReader.getMap(ResourcePathMapper.getPathToResource("map-0-0.tmx", true));
+        addCollidableObjects(map);
         Group root = new Group();
         root.getChildren().add(MapRenderer.getInstance().render(map));
         root.getChildren().add(new RectangleObject(16, 16));
@@ -32,7 +33,7 @@ public class CollisionTest extends Application {
         GameLoop gameLoop = new GameLoop() {
             @Override
             public void tick(final float secondsSinceLastFrame) {
-
+                CollisionManager.getInstance().updateWorld(secondsSinceLastFrame);
             }
         };
         gameLoop.start();
