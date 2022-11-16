@@ -1,10 +1,11 @@
 package com.example.tiledmaptest;
 
-import javafx.scene.shape.Rectangle;
 import org.dyn4j.dynamics.Body;
 import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.MassType;
 import org.dyn4j.world.World;
+
+import java.util.List;
 
 /**
  * Manages a world instance where collisions will be simulated.
@@ -36,6 +37,9 @@ public final class CollisionManager {
     public void updateWorld(final float secondsSinceLastFrame) {
         world.update(secondsSinceLastFrame);
     }
+    public List<Body> getBodies() {
+        return world.getBodies();
+    }
 
     /**
      * Adds a movable rectangle to the world. Any rectangle that should be moved
@@ -48,8 +52,9 @@ public final class CollisionManager {
         final float height = entity.getHeight() / PIXELS_TO_METERS;
         body.addFixture(Geometry.createRectangle(width, height));
         body.setMass(MassType.NORMAL);
+        entity.setBody(body);
         body.setUserData(entity);
-        world.addBody(body);
+        world.addBody(entity.getBody());
     }
 
     /**
@@ -63,7 +68,8 @@ public final class CollisionManager {
         final float height = entity.getHeight() / PIXELS_TO_METERS;
         body.addFixture(Geometry.createRectangle(width, height));
         body.setMass(MassType.INFINITE);
+        entity.setBody(body);
         body.setUserData(entity);
-        world.addBody(body);
+        world.addBody(entity.getBody());
     }
 }
