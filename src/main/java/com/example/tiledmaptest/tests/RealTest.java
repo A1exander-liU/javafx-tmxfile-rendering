@@ -1,5 +1,8 @@
-package com.example.tiledmaptest;
+package com.example.tiledmaptest.tests;
 
+import com.example.tiledmaptest.Entity;
+import com.example.tiledmaptest.MapRenderer;
+import com.example.tiledmaptest.WorldManager;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -13,7 +16,6 @@ import org.tiledreader.TiledMap;
 import org.tiledreader.TiledReader;
 
 import java.io.IOException;
-import java.security.Key;
 
 public class RealTest extends Application {
     /**
