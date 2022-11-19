@@ -4,7 +4,7 @@
  <tileset firstgid="257" source="obstacleSet1.tsx"/>
  <layer id="1" name="Ground Layer" width="30" height="20">
   <data encoding="base64" compression="zlib">
-   eJzFlcsNgCAMQPHCAGq8q3EAP3Eh3cBJvDivmEjSEAotHz28iAntoxXkFEIMgMt417SKTbEremQOh/N9Ss+8XF4fmNe33lzeVPVi6/+6z/InL6dezreO8RYAbr0lkRV4F0YcxpaBzhjbwGKPCDAXpAHjWjFFQs2n98tDivPRAq8rn8sb8g+0eW15Yus1c4bU6zsfVYY+U/YgpR8cL8Vp5nHdHy6vjhsF/YzMCetNDdV7A/BdaRA=
+   eJzFlcsNgCAMQPHCAGq8i3EAP3Eh3cBJvDivmEjSECitgB5exIT2UaRyCCF6wGm9G1rNqtk0nWcOh+N5ysC8XN4QPm9ovbm8qer1rf/rfZY/eTn1cr51jLcAcOstiSzAOzPifKwZUGCN6gGOFRK7R6AINGBca8ZIqPnMeblJ0R8t8GL5MO+bf6DL68oTW6+d8029of6oMuwz5QxS9oPjpTjtPNj9gXlN3CDoPTIlrDc1VO8FLsdpUw==
   </data>
  </layer>
  <layer id="3" name="Obstacle Layer" width="30" height="20">
