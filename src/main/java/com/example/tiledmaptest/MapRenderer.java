@@ -3,6 +3,7 @@ package com.example.tiledmaptest;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import org.tiledreader.TiledTile;
 import org.tiledreader.TiledMap;
 import org.tiledreader.TiledTileset;
@@ -31,102 +32,74 @@ public final class MapRenderer {
     }
 
     /**
-     * Renders a tiled map into a grid pane. Each tile rendered will be stored
-     * as in image in each cell of the grid pane. Will be rendered into a single grid pane
-     * @param tiledMap the map to render
-     * @return the map rendered in a grid pane
-     * @throws IOException when an illegal IO operation happens
+     * Renders a map into a StackPane of GridPane's. Each tile will be stored
+     * as an ImageView in each cell of the GridPane.
+     * @param map the map to render
+     * @return the rendered map
      */
-    public GridPane render(final TiledMap tiledMap) throws IOException {
-        // To store all the images used on the tile map
-        // A hashmap of hashmaps!? :0
-        // Key(String) is the name of the tileset
-        // Value(Hashmap<Integer, Image>) is a map of local tile ids and the associated image
-        // Since the tile id is local to its own tileset, need to also define which tileset the tile belongs to
+    public StackPane render(final TiledMap map) throws IOException {
+        StackPane stackPane = new StackPane();
         HashMap<String, HashMap<Integer, Image>> tiles = new HashMap<>();
-        for (TiledTileset tiledTileset: tiledMap.getTilesets()) {
+        for (TiledTileset tiledTileset: map.getTilesets()) {
             tiles.put(tiledTileset.getName(), new HashMap<>());
         }
-        GridPane gridPane = new GridPane();
-        // reusable tile
-        TiledTile tile;
-        for (TiledLayer mapLayer: tiledMap.getTopLevelLayers()) {
-            // TiledTileLayers are the ones you actually render
-            if (mapLayer instanceof TiledTileLayer) {
-                // Nothing you can really do to not cast
-                TiledTileLayer tiledTileLayer = (TiledTileLayer) mapLayer;
-                // looping through each tile
-                for (int x = 0; x < tiledMap.getWidth(); x++) {
-                    for (int y = 0; y < tiledMap.getHeight(); y++) {
-                        tile = tiledTileLayer.getTile(x, y);
-                        // since there is a tile at this position, add its image
+        // iterate through each layer
+        for (TiledLayer tiledLayer: map.getTopLevelLayers()) {
+            GridPane gridPane = new GridPane();
+            // TiledTileLayers are the layers where actual tiles are drawn
+            if (tiledLayer instanceof TiledTileLayer tiledTileLayer) {
+                // iterate through all the tiles on the layer
+                for (int x = 0; x < map.getWidth(); x++) {
+                    for (int y = 0; y < map.getHeight(); y++) {
+                        // get tile at the specified location
+                        TiledTile tile = tiledTileLayer.getTile(x, y);
+                        ImageView imageView;
+                        // make the actual tile with its image if a tile was drawn there
                         if (tile != null) {
-                            makeTile(tile, tiles, gridPane, x, y);
-                        } else {
-                            // no tile at this position, so make an 'empty' tile to fill the space
-                            gridPane.add(makeEmptyTile(tiledMap), x, y);
+                            imageView = makeTile(tiles, tile, tile.getTileset().getName(),
+                                    tile.getTilesetX(), tile.getTilesetY());
+                        } else { // no tile was drawn here so make a dummy tile
+                            imageView = makeEmptyTile(map.getTileWidth(), map.getTileHeight());
                         }
+                        gridPane.add(imageView, x, y);
                     }
                 }
+                stackPane.getChildren().add(gridPane);
             }
         }
-        return gridPane;
+        return stackPane;
     }
-    /**
-     * Renders a tiled map by taking an image instead. Divides the image into tiles
-     * and stores in a grid pane.
-     * @param tiledMap the tiled map
-     * @param mapImagePath the relative path to the image of the map
-     * @return the map rendered in a grid pane
-     * @throws IOException when an illegal IO operation happens
+    /*
+    Returns an image view of the image of the tile. If the image already exists in the hashmap,
+    it will use the one inside otherwise it will make a new image and add it into the hashmap
+    and use the image that was added.
      */
-    public GridPane render(final TiledMap tiledMap, final String mapImagePath) throws IOException {
-        GridPane gridPane = new GridPane();
-        for (int x = 0; x < tiledMap.getWidth(); x++) {
-            for (int y = 0; y < tiledMap.getHeight(); y++) {
-                Image tileImg =  ImageCropper.crop(mapImagePath, x * tiledMap.getTileWidth(),
-                        y * tiledMap.getTileHeight(), tiledMap.getTileWidth(),
-                        tiledMap.getTileHeight(), true);
-                gridPane.add(new ImageView(tileImg), x, y);
-            }
-        }
-        return gridPane;
-    }
-    /**
-     * Creates a new tile, if the tile already exists in the hashmap, it will reuse
-     * the same image rather than creating a new image.
-     * @param tile the tile of the current iteration
-     * @param tiles the hashmap of the tile images in each tileset
-     * @param gridPane where the tiles are added to
-     * @param x the x position of the tile
-     * @param y the y position of the tile
-     * @throws IOException when an illegal IO operation happens
-     */
-    private void makeTile(final TiledTile tile, final HashMap<String, HashMap<Integer, Image>> tiles,
-                          final GridPane gridPane, final int x, final int y) throws IOException {
-        String tileSetName = tile.getTileset().getName();
-        // if the image already exists, use it instead of making anew one
-        if (tiles.get(tileSetName).containsKey(tile.getID())) {
-            ImageView view = new ImageView(tiles.get(tileSetName).get(tile.getID()));
-            gridPane.add(view, x, y);
+    private ImageView makeTile(
+            final HashMap<String, HashMap<Integer, Image>> tiles,
+            final TiledTile tile, final String tilesetName,
+            final int x, final int y) throws IOException {
+        // check if the hashmap contains the image of the tile
+        if (tiles.get(tilesetName).containsKey(tile.getID())) {
+            // use the image inside if it was contained
+            Image image = tiles.get(tilesetName).get(tile.getID());
+            return new ImageView(image);
         } else {
-            // make and add the image to the hashmap if it wasn't created already
-            Image tileImg = ImageCropper.crop(tile.getTileset().getImage().getSource(),
-                    tile.getTilesetX() * tile.getTileset().getTileWidth(),
-                    tile.getTilesetY() * tile.getTileset().getTileHeight(),
+            // since the image was not in the hashmap, make the image and add it into the hashmap
+            Image image = ImageCropper.crop(tile.getTileset().getImage().getSource(),
+                    x * tile.getTileset().getTileWidth(), y * tile.getTileset().getTileHeight(),
                     tile.getTileset().getTileWidth(), tile.getTileset().getTileHeight(), false);
-            tiles.get(tileSetName).put(tile.getID(), tileImg);
-            ImageView view = new ImageView(tiles.get(tileSetName).get(tile.getID()));
-            gridPane.add(view, x, y);
+            tiles.get(tilesetName).put(tile.getID(), image);
+            return new ImageView(image);
         }
     }
     /*
-    Creates an empty image view that is the size of a single tile.
+    Returns an image view of a dummy tile where a tile was not drawn. Defines the width and height
+    of the dummy tile to be the same as a regular tile.
      */
-    private ImageView makeEmptyTile(final TiledMap tiledMap) {
-        ImageView view = new ImageView();
-        view.setFitWidth(tiledMap.getTileWidth());
-        view.setFitHeight(tiledMap.getTileHeight());
-        return view;
+    private ImageView makeEmptyTile(final int tileWidth, final int tileHeight) {
+        ImageView imageView = new ImageView();
+        imageView.setFitWidth(tileWidth);
+        imageView.setFitHeight(tileHeight);
+        return imageView;
     }
 }

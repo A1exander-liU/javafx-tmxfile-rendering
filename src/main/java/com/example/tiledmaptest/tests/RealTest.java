@@ -9,6 +9,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.jbox2d.common.Vec2;
 import org.tiledreader.FileSystemTiledReader;
@@ -29,7 +30,7 @@ public class RealTest extends Application {
     public void start(final Stage primaryStage) {
         TiledReader reader = new FileSystemTiledReader();
         TiledMap map = reader.getMap(RealTest.class.getResource("/map-0-0.tmx").getPath());
-        GridPane renderedMap = null;
+        StackPane renderedMap = null;
         try {
             renderedMap = MapRenderer.getInstance().render(map);
         } catch (IOException e) {
