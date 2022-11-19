@@ -33,7 +33,7 @@ public class TMXMapTest extends Application {
         tiledMap = tiledReader.getMap(path);
         Group root = new Group();
         root.getChildren().add(MapRenderer.getInstance().render(tiledMap));
-        RectangleObject player = new RectangleObject(8, 8);
+        RectangleObject player = new RectangleObject(100, 100,8, 8);
         root.getChildren().add(player);
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
